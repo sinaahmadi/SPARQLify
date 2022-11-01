@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> -->
+
+    <title>SPARQLify</title>
+    <link rel=icon href="dist/rdf-256.png">
+
+    <link rel="canonical" href="https://sinaahmadi.github.io/SPARQLify/">
+    <!-- Bootstrap core CSS -->
+    <link href="dist/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">SPARQLify</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sinaahmadi/sparqlify">GitHub</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+
+      <div class="starter-template">
+        <h1>
+         <svg viewBox="0 0 943 1019" style="fill: currentColor; display: inline-block; vertical-align: -0.1em; height: 0.9em"><path fill-rule="evenodd" d="M845,668c-6-3-13-6-19-9l5-0c0,0-42-18-45-152 c-4-133,40-156,40-156l-0,0c33-17,61-43,79-78c48-91,14-203-77-252 C729-26,617,8,569,99c-20,37-25,78-19,117l-2-3c0,0,11,48-103,119 c-113,71-165,35-165,35l3,5c-3-2-6-4-10-6C183,317,70,352,22,443 c-48,91-14,203,77,252c68,36,147,26,204-19l-1,2c0,0,41-34,160,30 c94,50,108,100,110,118c-2,69,33,137,98,171c91,48,203,14,252-77 C970,829,935,717,845,668z M635,693c-15,5-58,11-148-37 c-98-53-113-97-115-110c1-16,1-32-2-48l1,1c0,0-8-43,104-112 c100-62,146-50,154-47c5,4,11,7,17,10c11,6,23,11,35,14 c14,13,39,50,42,149c3,99-26,137-42,150C664,671,648,681,635,693z   M622,81c-54,59-55,146-3,196c-26-25-25-77,1-126 c3-4,13-15,27-10c1,0,2,1,3,1c3,1,7,1,10,1 c22-1,38-19,37-41c-0-10-4-18-11-25c50-33,107-37,131-15l1,0 C765,12,677,21,622,81z   M78,431c-54,59-55,146-03,196c-26-25-25-77,1-126 c3-4,13-15,27-10c1,0,2,1,3,1c3,1,7,1,10,1 c22-1,38-19,37-41c-0-10-4-18-11-25c50-33,107-37,131-15l1,0 C221,363,133,371,78,431z   M654,728c-54,59-55,146-3,196c-26-25-25-77,1-126 c3-4,13-15,27-10c1,0,2,1,3,1c3,1,7,1,10,1 c22-1,38-19,37-41c-0-10-4-18-11-25c50-33,107-37,131-15l1,0 C797,659,709,668,654,728z"></path></svg>
+          SPARQLify
+        </h1>
+        <p class="lead">Generate SPARQL queries for lexicographical data<br></p>
+      </div>
+
+      <p>Following one of my previous posts on the <a href="https://sinaahmadi.github.io/posts/10-essential-sparql-queries-for-lexicographical-data-on-wikidata.html" target="_blank">10 basic but essential SPARQL queries for lexicographical data on Wikidata</a>, I decided to create a simple SPARQL query generator that helps non-experts get more familiar with SPARQL and also, create queries to look up words in <a href="https://www.wikidata.org/">Wikidata</a> and <a href="http://kaiko.getalp.org/about-dbnary/">Dbnary</a> quickly on their endpoints (<a href="https://query.wikidata.org/" target="_blank">Wikidata’s endpoint</a>, <a href="http://kaiko.getalp.org/sparql" target="_blank">Dbnary’s endpoint</a>). Please note that the translation option is only available for headwords. Also, regarding Dbnary, it is currently not possible to retrieve translations nor examples.</p>
+
+      <p><b>Ongoing project</b>: I am currently working on this as a side project to a) further complete the queries, and b) develop an NMT system to generate SPARQL queries from natural text.</p>
+
+<hr />
+<h4>Manual configuration</h4>
+<hr />
+<form>
+  <div class="row">
+    <div class="col">
+      <label for="lemma">Lemma</label>
+      <input type="text" class="form-control" placeholder="lemma" id="lemma" maxlength="15" name="lemma" value="book" />
+    </div>
+    <div class="col">
+        <div class="form-group">
+          <label for="source_language">Source language</label>
+          <select class="form-control" id="source_language" name="source_language">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="pt">Portuguese</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+          </select>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+          <label for="part_of_speech_tag">Part-of-speech tag</label>
+          <select class="form-control" id="part_of_speech_tag" name="part_of_speech_tag">
+            <option>Noun</option>
+            <option>Adjective</option>
+            <option>Adverb</option>
+            <option>Verb</option>
+          </select>
+        </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+        <div class="form-group">
+          <label for="information_categories">Information to retrieve (if available)</label>
+          <select class="form-control" id="information_categories" name="information_categories">
+            <option value="1">Just look it up!</option>
+            <option value="2">Senses</option>
+            <option value="3">Senses &amp; Definitions</option>
+            <option value="4">Senses, Deinitions &amp; Examples</option>
+          </select>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+          <label for="translation_languages">Translation language (only with Wikidata)</label>
+          <select class="form-control" id="translation_languages" name="translation_languages">
+            <option value="null"></option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="pt">Portuguese</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+          </select>
+        </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect2">Specify your target SPARQL endpoint: </label>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="target_SPARQL" id="Wikidata" checked="" />
+      <label class="form-check-label" for="Wikidata">Wikidata</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="target_SPARQL" id="Dbnary" />
+      <label class="form-check-label" for="Dbnary">Dbnary</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-primary" onclick="generateQuery()" id="generate_query">Generate</button>
+        </div>
+        <div class="col">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="limit_100" name="limit_100" />
+            <label class="form-check-label" for="limit_100">LIMIT 100 (for faster running)</label>
+          </div>
+      </div>
+    </div>
+  </div>  
+
+  <hr />
+
+  <h4>Translate natural text to SPARQL query (soon)</h4>
+  <hr />
+
+  <div class="form-group">
+    <!-- <label for="generated_sparql_query">Generated SPARQL query</label> -->
+    <input class="form-control bg-light" id="natural_text" rows="1" name="natural_text" value="Define &quot;antagonism&quot; in English." readonly></input>
+  </div>
+
+  <hr />
+  <h4>SPARQL query</h4>
+  <hr />
+
+  <div class="form-group">
+    <!-- <label for="generated_sparql_query">Generated SPARQL query</label> -->
+    <textarea class="form-control bg-light text-dark font-weight-bold" id="generated_sparql_query" rows="20" name="generated_sparql_query"></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" id="run_query" onclick="runQuery()">Run the query!</button>
+  
+</form>
+
+
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <script src="dist/script.js"></script>
+
+    <footer class="footer">
+      <div class="container text-center">
+        <small class="text-muted">&copy; 2021-2022 Sina Ahmadi (ahmadi.sina@outlook.com)</small>
+      </div>
+    </footer>
+
+  </body>
+</html>

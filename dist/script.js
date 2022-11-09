@@ -6,7 +6,27 @@ var languages_wiki = {
   "es": "Q1321",
   "pt": "Q5146",
   "de": "Q188",
-  "it": "Q652"
+  "it": "Q652",
+  "ar": "Q13955", // Arabic
+  "bn": "Q9610", // Bengali
+  "de": "Q188", // German
+  "en": "Q1860", // English
+  "es": "Q1321", // Spanish
+  "ff": "Q33454", // Fula
+  "fr": "Q150", // French
+  "hi": "Q1568", // Hindi
+  "id": "Q9240", // Indonesian
+  "it": "Q652", // Italian
+  "ja": "Q5287", // Japanese
+  "jv": "Q33549", // Javanese
+  "pa": "Q58635", // Punjabi
+  "pt": "Q5146", // Portuguese
+  "ru": "Q7737", // Russian
+  "tr": "Q256", // Turkish
+  "ur": "Q1617", // Urdu
+  "vi": "Q9199", // Vietnamese
+  "zh": "Q9192", // Chinese
+  "ckb": "Q36811"
 };
 
 var languages_dbnary = {
@@ -18,11 +38,49 @@ var languages_dbnary = {
   "it": "it"
 };
 
+var code_to_language = {
+  "en": "English",
+  "fr": "French",
+  "es": "Spanish",
+  "pt": "Portuguese",
+  "de": "German",
+  "it": "Italian",
+  "ar": "Arabic",
+  "bn": "Bengali",
+  "de": "German",
+  "en": "English",
+  "es": "Spanish",
+  "ff": "Fula",
+  "fr": "French",
+  "hi": "Hindi",
+  "id": "Indonesian",
+  "it": "Italian",
+  "ja": "Japanese",
+  "jv": "Javanese",
+  "pa": "Punjabi",
+  "pt": "Portuguese",
+  "ru": "Russian",
+  "tr": "Turkish",
+  "ur": "Urdu",
+  "vi": "Vietnamese",
+  "zh": "Chinese",
+  "ckb": "Sorani Kurdish"
+};
+
 var posTags = {
   "Noun": "Q1084",
   "Adjective": "Q34698",
   "Adverb": "Q380057",
-  "Verb": "Q24905"
+  "Verb": "Q24905",
+  "Pronoun": "Q36224",
+  "Verb": "Q24905",
+  "Adverb": "Q380057",
+  "Adjective": "Q34698",
+  "Quantitative": "Q21087400",
+  "Interjection": "Q83034",
+  "Preposition": "Q4833830",
+  "Article": "Q103184",
+  "Conjunction": "Q36484"
 };
 
 // Queries for Wikidata
@@ -98,6 +156,7 @@ function generateQuery() {
   var sourceLanguage = document.getElementById("source_language").value;
   var translationLanguage = document.getElementById("translation_languages").value;
   var query = "";
+  var query_natural_text = "";
   var formValid = false;
 
   if (document.getElementById('Wikidata').checked) {
@@ -106,32 +165,54 @@ function generateQuery() {
         query = queryTranslationWiki;
       } else {
         query = queryTranslationWikiLemma;
+        query_natural_text = "Translate \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + " into " + code_to_language[translationLanguage] + ".";
       }
     } else {
       switch (document.getElementById('information_categories').value) {
         case "1":
           query = queryBasicWiki;
+          if (lemma.length != 0) {
+            query_natural_text = "Look up \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + ".";
+          }
           break;
         case "2":
           query = querySensesWiki;
+          if (lemma.length != 0) {
+            query_natural_text = "What does \"" + lemma + "\" (" + posTag.toLowerCase() + ") mean in " + code_to_language[sourceLanguage] + "?";
+          }
           break;
         case "3":
           query = queryDefWiki;
+          if (lemma.length != 0) {
+          query_natural_text = "Define \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + ".";
+          }
           break;
         case "4":
           query = queryExamplesWiki;
+          if (lemma.length != 0) {
+            query_natural_text = "Define \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + " with usage examples.";
+          }
           break;
         }
     }} else {
       switch (document.getElementById('information_categories').value) {
         case "1":
           query = queryBasicWikiDbnary;
+          if (lemma.length != 0) {
+            query_natural_text = "Look up \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + ".";
+          }
           break;
         case "2":
           query = querySensesWikiDbnary;
+          if (lemma.length != 0) {
+            query_natural_text = "What does \"" + lemma + "\" (" + posTag.toLowerCase() + ") mean in " + code_to_language[sourceLanguage] + "?";
+          }
           break;
         case "3":
           query = queryDefWikiDbnary;
+          if (lemma.length != 0) {
+          query_natural_text = "Define \"" + lemma + "\" (" + posTag.toLowerCase() + ") in " + code_to_language[sourceLanguage] + ".";
+          }
           break;
       }
     }
@@ -158,6 +239,7 @@ function generateQuery() {
   }
 
   document.getElementById("generated_sparql_query").innerHTML = query;
+  document.getElementById("query_natural_text").innerHTML = query_natural_text;
 
 }
 

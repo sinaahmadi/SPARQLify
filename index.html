@@ -75,11 +75,23 @@
           <label for="source_language">Source language</label>
           <select class="form-control" id="source_language" name="source_language">
             <option value="en">English</option>
+            <option value="ar">Arabic</option>
+            <option value="bn">Bengali</option>
+            <option value="ckb">Central Kurdish</option>
+            <option value="zh">Chinese</option>
             <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="hi">Hindi</option>
+            <option value="id">Indonesian</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
             <option value="es">Spanish</option>
             <option value="pt">Portuguese</option>
-            <option value="de">German</option>
-            <option value="it">Italian</option>
+            <option value="pa">Punjabi</option>
+            <option value="ru">Russian</option>
+            <option value="tr">Turkish</option>
+            <option value="ur">Urdu</option>
+            <option value="vi">Vietnamese</option>
           </select>
         </div>
     </div>
@@ -91,6 +103,14 @@
             <option>Adjective</option>
             <option>Adverb</option>
             <option>Verb</option>
+            <option>Pronoun</option>
+            <option>Adverb</option>
+            <option>Adjective</option>
+            <option>Quantitative</option>
+            <option>Interjection</option>
+            <option>Preposition</option>
+            <option>Article</option>
+            <option>Conjunction</option> 
           </select>
         </div>
     </div>
@@ -104,7 +124,7 @@
             <option value="1">Just look it up!</option>
             <option value="2">Senses</option>
             <option value="3">Senses &amp; Definitions</option>
-            <option value="4">Senses, Deinitions &amp; Examples</option>
+            <option value="4">Senses, Definitions &amp; Examples</option>
           </select>
         </div>
     </div>
@@ -113,12 +133,24 @@
           <label for="translation_languages">Translation language (only with Wikidata)</label>
           <select class="form-control" id="translation_languages" name="translation_languages">
             <option value="null"></option>
+            <option value="ar">Arabic</option>
+            <option value="bn">Bengali</option>
+            <option value="ckb">Central Kurdish</option>
+            <option value="zh">Chinese</option>
             <option value="en">English</option>
             <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="hi">Hindi</option>
+            <option value="id">Indonesian</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
             <option value="es">Spanish</option>
             <option value="pt">Portuguese</option>
-            <option value="de">German</option>
-            <option value="it">Italian</option>
+            <option value="pa">Punjabi</option>
+            <option value="ru">Russian</option>
+            <option value="tr">Turkish</option>
+            <option value="ur">Urdu</option>
+            <option value="vi">Vietnamese</option>
           </select>
         </div>
     </div>
@@ -149,6 +181,15 @@
       </div>
     </div>
   </div>  
+  
+  <h5>Your query in natural language</h5>
+  <hr />
+
+  <div class="form-group">
+    <!-- <label for="generated_sparql_query">Generated SPARQL query</label> -->
+    <textarea class="form-control bg-light text-dark font-weight-light font-italic" id="query_natural_text" rows="1" name="query_natural_text" readonly style="resize: none;"></textarea>
+  </div>
+
 
   <hr />
 
